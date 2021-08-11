@@ -1,0 +1,57 @@
+﻿<Window x:Class="Lab_6_7.View.ListOfClients"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_6_7.View" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource= {RelativeSource Self}, Path=ViewModel}"
+        Title="ListOfEmployees" Height="768" Width="1366" WindowState="Maximized" WindowStyle="None" Icon="Image2.png">
+
+    <Grid>
+        <local:SearchControl x:Name="searchControl" SearchTextChanged="SearchControl_SearchTextChanged"/>
+        <DataGrid 
+            IsReadOnly="True"
+            CanUserAddRows="False"
+            SelectionMode="Extended" 
+            ColumnHeaderHeight ="50"
+            FontFamily="Arial" 
+            FontSize="18" 
+            SelectionChanged="DataGrid_SelectionChanged_1"
+            x:Name="DataGridXAML" 
+            IsSynchronizedWithCurrentItem="True"  
+            Margin="82,102,56,49" 
+            AutoGenerateColumns="False" 
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="3*" Binding="{Binding Path=ClPersonId}"/>
+                <DataGridTextColumn Header="ФИО" Width="10*" Binding="{Binding Path=ClFullName}"/>
+                <DataGridTextColumn Header="Телефон" Width="10*" Binding="{Binding Path=ClPhone}"/>
+            </DataGrid.Columns>
+
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding OrderGridSelectionChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+
+
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Height="98" BorderBrush="#00707070" Click="Button_Click_1">
+            
+            <Button.Background>
+                <ImageBrush ImageSource="/Lab 6-7;component/Image2.png"/>
+            </Button.Background>
+
+        </Button>
+        <Button x:Name="AddEmployee"  Content="Добавить" HorizontalAlignment="Left" Margin="1168,59,0,0" VerticalAlignment="Top" Width="134" Height="30" FontFamily="Arial" FontSize="13" Click="AddClient_Click"/>
+        <Button x:Name="Updateemployees" Content="Обновить" HorizontalAlignment="Left" Margin="987,59,0,0" VerticalAlignment="Top" Width="134" Height="30" FontFamily="Arial" FontSize="13" Click="UpdateClients_Click"/>
+    </Grid>
+</Window>
